@@ -73,8 +73,8 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Level Legend */}
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/80 text-[11px] sm:text-xs font-mono">
+        {/* Level Legend (Fondo sólido en vez de backdrop-blur para fluidez) */}
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-zinc-900/90 border border-zinc-800/80 text-[11px] sm:text-xs font-mono">
           <span className="text-zinc-400">Leyenda:</span>
           {Object.entries(LEVEL_LABELS).map(([key, item]) => (
             <div key={key} className="flex items-center gap-1.5">
@@ -91,7 +91,7 @@ export default function Skills() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:pr-14">
             {SKILLS_DATA.map((cat, i) => (
               <ElectricBorder key={i} color="#10b981" speed={0} chaos={0} borderRadius={16}>
-                <div className="p-4 sm:p-6 rounded-2xl bg-zinc-900/60 backdrop-blur-sm border border-zinc-800 space-y-3 sm:space-y-4 hover:border-zinc-700/80 transition-colors h-full">
+                <div className="p-4 sm:p-6 rounded-2xl bg-zinc-900/90 border border-zinc-800 space-y-3 sm:space-y-4 hover:border-zinc-700/80 transition-colors duration-200 transform-gpu will-change-transform h-full">
                   <div>
                     <h3 className="font-semibold text-zinc-100 text-sm sm:text-base">{cat.title}</h3>
                     <p className="text-xs text-zinc-400 mt-1">{cat.description}</p>
