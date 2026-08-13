@@ -64,7 +64,8 @@ export default function ElectricBorder({
       let y = 0;
       let amplitude = baseAmplitude;
       let frequency = baseFrequency;
-      for (let i = 0; i < octaves; i++) {        let octaveAmplitude = amplitude;
+      for (let i = 0; i < octaves; i++) {
+        let octaveAmplitude = amplitude;
         if (i === 0) octaveAmplitude *= baseFlatness;
         y += octaveAmplitude * noise2D(frequency * x + seed * 100, time * frequency * 0.3);
         frequency *= lacunarity;
@@ -175,6 +176,17 @@ export default function ElectricBorder({
     let { width, height } = updateSize();
     let lastDpr = Math.min(window.devicePixelRatio || 1, 2);
 
+    // Si speed es 0, el borde no tiene por qué seguir animándose: se dibuja
+    // una sola vez y el loop de rAF ni siquiera arranca. Antes, aunque se
+    // pasara speed={0} y chaos={0} (borde "estático"), este componente
+    // seguía corriendo un requestAnimationFrame completo por cada instancia
+    // -60 veces por segundo, recalculando ruido octavado para cientos de
+    // puntos- sin que el resultado visual cambiara un solo píxel entre
+    // frames. Con varias tarjetas en pantalla (una instancia cada una) eso
+    // saturaba el hilo principal y le robaba frames a otras animaciones,
+    // como el LogoLoop.
+    const isStatic = speed === 0;
+
     const drawElectricBorder = (currentTime: number) => {
       if (!canvas || !ctx) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -207,7 +219,8 @@ export default function ElectricBorder({
       const sampleCount = Math.floor(approximatePerimeter / 2);
 
       ctx.beginPath();
-      for (let i = 0; i <= sampleCount; i++) {        const progress = i / sampleCount;
+      for (let i = 0; i <= sampleCount; i++) {
+        const progress = i / sampleCount;
         const point = getRoundedRectPoint(progress, left, top, borderWidth, borderHeight, radius);
         const xNoise = octavedNoise(
           progress * 8,
@@ -243,15 +256,26 @@ export default function ElectricBorder({
       ctx.closePath();
       ctx.stroke();
 
-      animationRef.current = requestAnimationFrame(drawElectricBorder);
+      // Solo se reprograma el siguiente frame si el borde es animado.
+      if (!isStatic) {
+        animationRef.current = requestAnimationFrame(drawElectricBorder);
+      }
     };
 
-    const resizeObserver = new ResizeObserver(() => {      const newSize = updateSize();
+    const resizeObserver = new ResizeObserver(() => {
+      const newSize = updateSize();
       width = newSize.width;
       height = newSize.height;
+      // Si es estático, un resize sí debe forzar un redibujado (una vez),
+      // ya que no hay loop corriendo que lo haga por su cuenta.
+      if (isStatic) {
+        drawElectricBorder(lastFrameTimeRef.current);
+      }
     });
     resizeObserver.observe(container);
 
+    // Primer dibujado: siempre se hace vía rAF para asegurar que el canvas
+    // ya tenga su tamaño correcto (evita flicker en el primer paint).
     animationRef.current = requestAnimationFrame(drawElectricBorder);
 
     return () => {

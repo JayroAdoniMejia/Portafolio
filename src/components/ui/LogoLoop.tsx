@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
+import React, { useEffect, useMemo, useRef, useState, memo } from 'react';
 import './LogoLoop.css';
 
 interface LogoItem {
@@ -10,8 +10,6 @@ interface LogoItem {
   title?: string;
   href?: string;
 }
-
-// ... resto del archivo sin cambios
 
 interface LogoLoopProps {
   logos: LogoItem[];
@@ -51,6 +49,14 @@ export const LogoLoop: React.FC<LogoLoopProps> = memo(({
   const [copyCount, setCopyCount] = useState(ANIMATION_CONFIG.MIN_COPIES);
   const [isHovered, setIsHovered] = useState(false);
 
+  // Ref espejo de isHovered: permite que el loop de animación lea el valor
+  // más reciente sin tener que estar en el array de dependencias del
+  // useEffect, evitando que rAF se cancele/reinicie en cada hover.
+  const isHoveredRef = useRef(false);
+  useEffect(() => {
+    isHoveredRef.current = isHovered;
+  }, [isHovered]);
+
   const isVertical = direction === 'up' || direction === 'down';
 
   const targetVelocity = useMemo(() => {
@@ -83,7 +89,7 @@ export const LogoLoop: React.FC<LogoLoopProps> = memo(({
       const deltaTime = Math.max(0, timestamp - lastTime) / 1000;
       lastTime = timestamp;
 
-      const target = isHovered ? (hoverSpeed ?? 0) : targetVelocity;
+      const target = isHoveredRef.current ? (hoverSpeed ?? 0) : targetVelocity;
       const easing = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
       currentVel += (target - currentVel) * easing;
 
@@ -95,7 +101,9 @@ export const LogoLoop: React.FC<LogoLoopProps> = memo(({
 
     rafId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafId);
-  }, [seqHeight, isHovered, hoverSpeed, targetVelocity]);
+    // isHovered NO va aquí a propósito: se lee vía isHoveredRef para que
+    // el loop de rAF nunca se destruya/reinicie al entrar o salir del hover.
+  }, [seqHeight, hoverSpeed, targetVelocity]);
 
   return (
     <div
@@ -128,5 +136,7 @@ export const LogoLoop: React.FC<LogoLoopProps> = memo(({
     </div>
   );
 });
+
+LogoLoop.displayName = 'LogoLoop';
 
 export default LogoLoop;

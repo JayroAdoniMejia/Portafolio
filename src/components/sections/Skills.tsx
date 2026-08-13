@@ -2,7 +2,6 @@
 
 import { SKILLS_DATA, LEVEL_LABELS } from "@/data/skills";
 import LogoLoop from "@/components/ui/LogoLoop";
-import DotField from "@/components/ui/DotField";
 import ElectricBorder from "@/components/ui/ElectricBorder";
 import { 
   SiTypescript, 
@@ -51,15 +50,9 @@ export default function Skills() {
   return (
     <section id="skills" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-900/60 bg-zinc-950 relative overflow-hidden w-full">
       
-      {/* Canvas interactivo de partículas / puntos de fondo */}
-      <DotField 
-        dotRadius={1.5}
-        dotSpacing={18}
-        bulgeStrength={60}
-        cursorRadius={300}
-        gradientFrom="rgba(16, 185, 129, 0.35)"
-        gradientTo="rgba(113, 113, 122, 0.2)"
-        glowColor="rgba(16, 185, 129, 0.15)"
+      {/* Patrón de puntos estático CSS (Ultra fluido, 0% procesamiento JS) */}
+      <div 
+        className="absolute inset-0 bg-[radial-gradient(#27272a_1px,transparent_1px)] bg-size-[18px_18px] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-50 pointer-events-none" 
       />
 
       <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12 relative z-10">
@@ -73,8 +66,8 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Level Legend (Fondo sólido en vez de backdrop-blur para fluidez) */}
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-zinc-900/90 border border-zinc-800/80 text-[11px] sm:text-xs font-mono">
+        {/* Level Legend */}
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800/80 text-[11px] sm:text-xs font-mono">
           <span className="text-zinc-400">Leyenda:</span>
           {Object.entries(LEVEL_LABELS).map(([key, item]) => (
             <div key={key} className="flex items-center gap-1.5">
@@ -87,11 +80,11 @@ export default function Skills() {
         {/* Layout principal: Tarjetas + Tira de logos flotante */}
         <div className="relative">
           
-          {/* Grid de Tarjetas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:pr-14">
+          {/* Grid de Tarjetas (Alineado al 100% del contenedor max-w-5xl) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 w-full">
             {SKILLS_DATA.map((cat, i) => (
               <ElectricBorder key={i} color="#10b981" speed={0} chaos={0} borderRadius={16}>
-                <div className="p-4 sm:p-6 rounded-2xl bg-zinc-900/90 border border-zinc-800 space-y-3 sm:space-y-4 hover:border-zinc-700/80 transition-colors duration-200 transform-gpu will-change-transform h-full">
+                <div className="p-4 sm:p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3 sm:space-y-4 hover:border-zinc-700/80 transition-colors duration-150 transform-gpu h-full">
                   <div>
                     <h3 className="font-semibold text-zinc-100 text-sm sm:text-base">{cat.title}</h3>
                     <p className="text-xs text-zinc-400 mt-1">{cat.description}</p>
@@ -116,11 +109,11 @@ export default function Skills() {
             ))}
           </div>
 
-          {/* Tira flotante de logos a la derecha (solo pantallas grandes) */}
-          <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-10 overflow-hidden pointer-events-none">
+          {/* Tira flotante de logos centrada en el margen derecho exterior */}
+          <div className="hidden xl:flex absolute -right-14 xl:-right-16 top-0 bottom-0 w-12 justify-center overflow-hidden pointer-events-none">
             <LogoLoop
               logos={TECH_LOGOS}
-              speed={35}
+              speed={80}
               direction="up"
               logoHeight={22}
               gap={24}
