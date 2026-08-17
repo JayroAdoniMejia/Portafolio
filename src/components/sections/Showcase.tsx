@@ -34,7 +34,7 @@ export default function Showcase() {
           </p>
         </div>
 
-        {/* Dome Gallery Wrapper */}
+        {/* Dome Gallery Wrapper  con efectos para las imagenes */}
         <div className="w-full flex justify-center items-center overflow-hidden">
           <DomeGallery images={CERTIFICATE_IMAGES} />
         </div>
