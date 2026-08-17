@@ -8,11 +8,30 @@ import { PROFILE_DATA } from "@/data/profile";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Manejador de navegación suave respetando el ID de sección
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.replace("#", "");
+      const element = document.getElementById(targetId);
+
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        // Actualiza la URL sin recargar la página
+        window.history.pushState(null, "", href);
+      }
+    }
+    setIsOpen(false);
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/60 w-full">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         
-        {/* Brand / Name */}
+        {/* Brand / Logo */}
         <Link 
           href="/" 
           className="flex items-center gap-2 font-mono font-semibold text-zinc-100 hover:text-emerald-400 transition-colors text-sm sm:text-base"
@@ -27,14 +46,15 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors font-medium"
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors font-medium cursor-pointer"
             >
               {link.name}
             </a>
           ))}
         </nav>
 
-        {/* Status Badge & CTA */}
+        {/* Status Badge */}
         <div className="hidden lg:flex items-center gap-3">
           <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400">
             <span className="relative flex h-2 w-2">
@@ -63,8 +83,8 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-sm text-zinc-300 hover:text-emerald-400 py-2 px-3 rounded-md hover:bg-zinc-900/60 font-medium transition-colors"
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-sm text-zinc-300 hover:text-emerald-400 py-2 px-3 rounded-md hover:bg-zinc-900/60 font-medium transition-colors cursor-pointer"
               >
                 {link.name}
               </a>

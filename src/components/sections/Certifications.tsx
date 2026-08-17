@@ -4,7 +4,10 @@ import ElectricBorder from "@/components/ui/ElectricBorder";
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-900/60 bg-zinc-950 w-full overflow-hidden">
+    <section 
+      id="education" 
+      className="scroll-mt-20 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-900/60 bg-zinc-950 w-full overflow-hidden"
+    >
       <div className="max-w-4xl mx-auto space-y-8 sm:space-y-12">
         
         {/* Section Header */}

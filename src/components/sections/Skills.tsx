@@ -24,7 +24,7 @@ import {
   SiLinux 
 } from "react-icons/si";
 
-// Íconos monocromáticos (blanco / zinc) con efecto hover suave
+// Íconos monocromáticos (blanco / zinc) con efecto hover suave para la tira de logos flotantes
 const TECH_LOGOS = [
   { node: <SiTypescript className="text-zinc-400 hover:text-white transition-colors" />, title: "TypeScript" },
   { node: <SiNextdotjs className="text-zinc-400 hover:text-white transition-colors" />, title: "Next.js" },

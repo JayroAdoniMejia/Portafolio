@@ -15,7 +15,10 @@ const CERTIFICATE_IMAGES = [
 
 export default function Showcase() {
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-900 bg-zinc-950 w-full overflow-hidden">
+    <section 
+      id="certifications" 
+      className="scroll-mt-20 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-900 bg-zinc-950 w-full overflow-hidden"
+    >
       <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
         
         {/* Section Header */}
