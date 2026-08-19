@@ -1,5 +1,6 @@
 import DomeGallery from "@/components/ui/DomeGallery";
 
+//las imagenes que se muestran en mi dom galery
 const CERTIFICATE_IMAGES = [
   "/certificates/ccna-itn.jpg",
   "/certificates/python-essentials.jpg",
