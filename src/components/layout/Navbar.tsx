@@ -8,7 +8,7 @@ import { PROFILE_DATA } from "@/data/profile";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Manejador de navegación suave respetando el ID de sección
+  // Manejador de navegación suave respetando el ID de sección y subfolder en GitHub Pages
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
@@ -20,7 +20,7 @@ export default function Navbar() {
 
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
-        // Actualiza la URL sin recargar la página
+        // Actualiza el hash en la URL sin forzar navegación ni recarga
         window.history.pushState(null, "", href);
       }
     }
@@ -70,6 +70,7 @@ export default function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden p-2 text-zinc-400 hover:text-zinc-100 focus:outline-none rounded-lg hover:bg-zinc-900 transition-colors"
           aria-label="Toggle navigation menu"
+          aria-expanded={isOpen}
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
