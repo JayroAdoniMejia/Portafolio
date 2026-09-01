@@ -4,7 +4,7 @@ export const PROFILE_DATA = {
     status: "Buscando Práctica Profesional",
     available: true,
     location: "Honduras",
-    email: "tu-email@ejemplo.com", // Actualiza con tu email real
+    email: "jayromejiafunes@gmail.com", // Actualiza con tu email real
     socials: {
       github: "https://github.com", // Actualiza con tu usuario de GitHub
       linkedin: "https://linkedin.com/in/", // Actualiza con tu LinkedIn

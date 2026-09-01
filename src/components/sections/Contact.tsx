@@ -27,8 +27,8 @@ export default function Contact() {
                 <div className="space-y-3 text-xs text-zinc-300">
                   <div className="flex items-center gap-3">
                     <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <a href={`mailto:${PROFILE_DATA.email}`} className="hover:text-emerald-400 transition-colors truncate">
-                      {PROFILE_DATA.email}
+                    <a href="mailto:jayromejiafunes@gmail.com" className="hover:text-emerald-400 transition-colors truncate">
+                      jayromejiafunes@gmail.com
                     </a>
                   </div>
                   <div className="flex items-center gap-3">
@@ -58,7 +58,7 @@ export default function Contact() {
                 Puedes enviarme un correo directamente haciendo clic en el siguiente botón:
               </p>
               <a
-                href={`mailto:${PROFILE_DATA.email}?subject=Contacto%20desde%20Portafolio&body=Hola%20Jayro,%20vi%20tu%20portafolio%20y...`}
+                href="mailto:jayromejiafunes@gmail.com?subject=Contacto%20desde%20Portafolio&body=Hola%20Jayro,%20vi%20tu%20portafolio%20y..."
                 className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs transition-colors"
               >
                 <Send className="w-4 h-4 shrink-0" />
