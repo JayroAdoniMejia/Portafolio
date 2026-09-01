@@ -1,17 +1,20 @@
 import DomeGallery from "@/components/ui/DomeGallery";
 
-//las imagenes que se muestran en mi dom galery
+// Detecta si está en producción para agregar el subpath /Portafolio
+const basePath = process.env.NODE_ENV === 'production' ? '/Portafolio' : '';
+
+// Arreglo con la ruta dinámica aplicada
 const CERTIFICATE_IMAGES = [
-  "/certificates/ccna-itn.jpg",
-  "/certificates/python-essentials.jpg",
-  "/certificates/data-analytics.jpg",
-  "/certificates/php-developer.jpg",
-  "/certificates/db-admin.jpg",
-  "/certificates/infop-1.jpg",
-  "/certificates/infop-2.jpg",
-  "/certificates/infop-3.jpg",
-  "/certificates/infop-4.jpg",
-  "/certificates/folio-cert.jpg",
+  `${basePath}/certificates/ccna-itn.jpg`,
+  `${basePath}/certificates/python-essentials.jpg`,
+  `${basePath}/certificates/data-analytics.jpg`,
+  `${basePath}/certificates/php-developer.jpg`,
+  `${basePath}/certificates/db-admin.jpg`,
+  `${basePath}/certificates/infop-1.jpg`,
+  `${basePath}/certificates/infop-2.jpg`,
+  `${basePath}/certificates/infop-3.jpg`,
+  `${basePath}/certificates/infop-4.jpg`,
+  `${basePath}/certificates/folio-cert.jpg`,
 ];
 
 export default function Showcase() {
@@ -35,7 +38,7 @@ export default function Showcase() {
           </p>
         </div>
 
-        {/* Dome Gallery Wrapper  con efectos para las imagenes */}
+        {/* Dome Gallery Wrapper */}
         <div className="w-full flex justify-center items-center overflow-hidden">
           <DomeGallery images={CERTIFICATE_IMAGES} />
         </div>
