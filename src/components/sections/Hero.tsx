@@ -5,6 +5,8 @@ import { PROFILE_DATA } from "@/data/profile";
 export default function Hero() {
   const githubUrl = "https://github.com/JayroAdoniMejia";
   const linkedinUrl = "https://www.linkedin.com/in/jayro-adoni-mejia-funes-1253043a8/";
+  const email = "jayromejiafunes@gmail.com";
+  const basePath = process.env.NODE_ENV === 'production' ? '/Portafolio' : '';
 
   return (
     <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 sm:py-20 px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
@@ -49,15 +51,15 @@ export default function Hero() {
               Ver certificaciones
             </a>
             <a
-                   href="/CV_Jayro_Mejia.pdf"
-            download="CV - JAYRO ADONI MEJÍA FUNES.pdf"
-                 target="_blank"
-                  rel="noopener noreferrer"
-               className="px-4 py-2.5 rounded-lg border border-zinc-800 text-zinc-400 hover:text-zinc-100 hover:border-zinc-700 transition-colors flex items-center justify-center gap-2 text-sm font-medium"
->
+              href={`${basePath}/CV_Jayro_Mejia.pdf`}
+              download="CV - JAYRO ADONI MEJÍA FUNES.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 rounded-lg border border-zinc-800 text-zinc-400 hover:text-zinc-100 hover:border-zinc-700 transition-colors flex items-center justify-center gap-2 text-sm font-medium"
+            >
               <FileText className="w-4 h-4 shrink-0" />
               <span>Descargar CV</span>
-              </a>
+            </a>
           </div>
 
           {/* Social Links */}
@@ -85,7 +87,7 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href={`mailto:${PROFILE_DATA.email}`}
+              href={`mailto:${email}`}
               className="text-zinc-400 hover:text-zinc-100 transition-colors p-2 rounded-md hover:bg-zinc-900"
               aria-label="Email Contact"
             >
@@ -104,7 +106,7 @@ export default function Hero() {
             {/* Marco Circular para la Fotografía */}
             <div className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-emerald-500/60 bg-zinc-900 shadow-2xl">
               <Image
-                src="/profile.jpg"
+                src={`${basePath}/profile.jpg`}
                 alt={PROFILE_DATA.name}
                 fill
                 priority
