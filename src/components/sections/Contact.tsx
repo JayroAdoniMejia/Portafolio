@@ -3,6 +3,13 @@ import { PROFILE_DATA } from "@/data/profile";
 import ElectricBorder from "@/components/ui/ElectricBorder";
 
 export default function Contact() {
+  const email = "jayromejiafunes@gmail.com";
+  const subject = encodeURIComponent("Contacto desde Portafolio");
+  const body = encodeURIComponent("Hola Jayro, vi tu portafolio y...");
+
+  // URL directa a la interfaz web de Gmail
+  const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+
   return (
     <section id="contact" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-zinc-900/60 bg-zinc-950 w-full overflow-hidden">
       <div className="max-w-4xl mx-auto space-y-8 sm:space-y-12">
@@ -27,8 +34,8 @@ export default function Contact() {
                 <div className="space-y-3 text-xs text-zinc-300">
                   <div className="flex items-center gap-3">
                     <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <a href="mailto:jayromejiafunes@gmail.com" className="hover:text-emerald-400 transition-colors truncate">
-                      jayromejiafunes@gmail.com
+                    <a href={`mailto:${email}`} className="hover:text-emerald-400 transition-colors truncate">
+                      {email}
                     </a>
                   </div>
                   <div className="flex items-center gap-3">
@@ -55,14 +62,16 @@ export default function Contact() {
             <div className="p-4 sm:p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 space-y-4">
               <h3 className="font-semibold text-zinc-200 text-xs sm:text-sm">Enviar Mensaje</h3>
               <p className="text-xs text-zinc-400 leading-relaxed">
-                Puedes enviarme un correo directamente haciendo clic en el siguiente botón:
+                Puedes redactar un correo directamente desde la web de Gmail haciendo clic en el siguiente botón:
               </p>
               <a
-                href="mailto:jayromejiafunes@gmail.com?subject=Contacto%20desde%20Portafolio&body=Hola%20Jayro,%20vi%20tu%20portafolio%20y..."
+                href={gmailWebUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs transition-colors"
               >
                 <Send className="w-4 h-4 shrink-0" />
-                <span>Redactar correo directo</span>
+                <span>Abrir Gmail y redactar</span>
               </a>
             </div>
           </ElectricBorder>
