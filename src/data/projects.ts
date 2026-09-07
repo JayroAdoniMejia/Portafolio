@@ -26,7 +26,7 @@ export const PROJECTS_DATA: Project[] = [
       "Sistema completo de auditoría y roles de usuario.",
     ],
     category: "Proyecto Académico",
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/JayroAdoniMejia",
     featured: true,
   },
   {
@@ -42,7 +42,7 @@ export const PROJECTS_DATA: Project[] = [
       "Interfaz reactiva e interactiva desarrollada en Vue.js.",
     ],
     category: "Proyecto Académico",
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/JayroAdoniMejia/Biblioteck-Pro",
     featured: true,
   },
   {
@@ -57,7 +57,7 @@ export const PROJECTS_DATA: Project[] = [
       "Manejo de estado global y caché de peticiones.",
     ],
     category: "Proyecto Personal",
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/JayroAdoniMejia",
     featured: false,
   },
   {
