@@ -34,7 +34,7 @@ export default function Showcase() {
             Certificados en 3D
           </h2>
           <p className="text-zinc-400 text-xs sm:text-sm max-w-xl mx-auto sm:mx-0">
-            Mueve o toca con el mouse para ver las acreditaciones obtenidas en redes, bases de datos, desarrollo y analítica.
+            Mueve con el mouse o toca para ver las acreditaciones obtenidas en bases de datos, desarrollo, analítica y redes.
           </p>
         </div>
 
